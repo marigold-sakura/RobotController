@@ -34,7 +34,7 @@ void CCCDrive::driveforward(int speed) {
 }
 
 void CCCDrive::drive(int motor, int motorDirection, int motorSpeed){
-  _motorSpeed = motorSpeed; // may need to remove these or add the _motorAddress = motorAddress back to the stop function
+  _motorSpeed = motorSpeed; // may need to remove the private variables later
   _motorDirection = motorDirection;
   Wire.beginTransmission(motor);
   Wire.write(_motorDirection);
@@ -44,6 +44,7 @@ void CCCDrive::drive(int motor, int motorDirection, int motorSpeed){
 }
 
 void CCCDrive::stop(int motorAddress){
+  _motorAddress = motorAddress;
   Wire.beginTransmission(motorAddress);
   Wire.write(3);
   Wire.write(255); //Stop
