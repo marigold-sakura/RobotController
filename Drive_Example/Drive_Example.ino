@@ -37,15 +37,18 @@ void loop1() {
 }
 
 void loop() {
-  /*
+ 
   Robot.allstop();
+   
 
   
   Robot.driveforward(50);
+  
   delay(2000);
   Robot.allstop();
   delay(1000);
   Robot.drivereverse(50);
+  
   delay(2000);
   Robot.allstop();
   delay(1000);
@@ -68,7 +71,7 @@ void loop() {
   Robot.allstop();
   delay(1000);
 
-  */
+  
   /* 
   motorFL.drive(2, 100);
   Serial.println("Motor Front Left Forward at 100%");

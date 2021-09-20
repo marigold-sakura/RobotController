@@ -16,6 +16,7 @@ class CCCDrive {
     public:
         CCCDrive();
         void begin();
+        void stop(int motorAddress);
         void allstop();
         void driveforward(int speed);   
         void drivereverse(int speed);
@@ -36,6 +37,9 @@ class CCCDrive {
         CCCmotor motorRL(MotorRL);  
         */
     private:
+    int _motorAddress;
+    int _motorDirection;
+    int _motorSpeed;
 
 };
 
