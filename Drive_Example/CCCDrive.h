@@ -3,7 +3,7 @@
 
 #include "Arduino.h"
 #include "Wire.h"
-#include "CCCmotor.h"
+//#include "CCCmotor.h"
 
 /*
 #define MotorFL 16
@@ -22,11 +22,9 @@ class CCCDrive {
         void leftturn(int speed);
         void rightturn(int speed);
         void strafe(int dir, int speed);
-        void diagonal(int dir, int speed);     
-        int MotorFL = 16;
-        int MotorFR = 17;
-        int MotorRR = 18;
-        int MotorRL = 19;
+        void diagonal(int dir, int speed); 
+        void drive(int motor, int dir, int speed);    
+        int Motors[4] = {16,17,18,19};
         //CCCmotor motorFL(16);
         //CCCmotor motorRR(17);
         //CCCmotor motorFR(18);
