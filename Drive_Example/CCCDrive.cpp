@@ -2,8 +2,69 @@
 #include "Arduino.h"
 #include "wire.h"
 
-CCCDrive::CCCDrive(){}
+CCCDrive::CCCDrive(){
+    pinMode(Trigger_Pin, OUTPUT);
+    for(int x = 0; x < 3; x++) {
+      pinMode(Echo_Pins[x], INPUT);
+    }
+}
 
+void CCCDrive::sonar() {
+  this->ping(0);
+  delay(20);
+  this->ping(1);
+  delay(20);
+  this->ping(2);
+}
+
+void CCCDrive::ping(int sensornumber) {
+  long duration = 0;
+  long distance = 0;
+  long echotimer = 0;
+  long echotimerend = 0;
+  
+  digitalWrite(Trigger_Pin, LOW);
+  delayMicroseconds(2);
+  // Sets the trigPin HIGH (ACTIVE) for 10 microseconds
+  digitalWrite(Trigger_Pin, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(Trigger_Pin, LOW);
+  //Serial.println("Triggered");
+  // Reads the echoPin, returns the sound wave travel time in microseconds
+  //duration = pulseIn(Echo_Pins[sensornumber], HIGH);
+  unsigned long numloops = 0;
+  unsigned long maxloops = 10000;
+  
+  while(digitalRead(Echo_Pins[sensornumber]) == LOW) {
+    if(numloops++ == maxloops) { 
+      break; 
+    } else {
+      echotimer = micros();
+    }
+  }
+
+  while(digitalRead(Echo_Pins[sensornumber]) == HIGH) {
+    if(numloops++ == maxloops) { 
+      break; 
+    } else {
+      echotimerend = micros();
+    }
+  }
+
+  duration = echotimerend - echotimer;
+
+  // Calculating the distance
+  distance = duration * 0.034 / 2; // Speed of sound wave divided by 2 (go and back)
+  if(distance > 0) { 
+    if(distance > 150) {
+      echo[sensornumber] = 150; //max it out at 150 cm
+    } else {
+      echo[sensornumber] = distance;      
+    }
+  } else {
+    echo[sensornumber] = 0;
+  }
+}
 
 void CCCDrive::begin() {
   this->allstop();
