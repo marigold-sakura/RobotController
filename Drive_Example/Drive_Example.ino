@@ -33,27 +33,27 @@ void loop() {
   Serial.print("Sensor 2: ");
   Serial.println(Robot.echo[2]);
 
-  if(Robot.echo[1] > 40) {
-    Robot.driveforward(25);
+  if(Robot.echo[1] > 60) {
+    Robot.driveforward(100);
     Serial.println("Driving Forward, nothing in my way!");
   } else {
     Robot.allstop();
     Serial.println("I'm about to crash, stopped!");
-    Robot.rightturn(25);
+    Robot.rightturn(100);
     Serial.println("Turning Right for 4 seconds");
-    delay(4000);    
+    delay(1500);    
   }
 
-  if(Robot.echo[2] < 40) {
-    Robot.rightturn(25);
+  if(Robot.echo[2] < 60) {
+    Robot.rightturn(100);
     Serial.println("Turning Right for 2 seconds");
-    delay(2000);
+    delay(1000);
   }
 
-  if(Robot.echo[0] < 40) {
+  if(Robot.echo[0] < 60) {
     Serial.println("Turning Left for 2 seconds");
-    Robot.leftturn(25);
-    delay(2000);
+    Robot.leftturn(100);
+    delay(1000);
   }
 
 /*  
