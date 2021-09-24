@@ -3,10 +3,20 @@
 #include "wire.h"
 
 CCCDrive::CCCDrive(){
+	pinMode(25, OUTPUT);
+	digitalWrite(25, LOW);
     pinMode(Trigger_Pin, OUTPUT);
     for(int x = 0; x < 3; x++) {
       pinMode(Echo_Pins[x], INPUT);
     }
+}
+
+void CCCDrive::led(int value) {
+	if(value == 0) {
+		digitalWrite(25, LOW);
+	} else {
+		digitalWrite(25, HIGH);
+	}
 }
 
 void CCCDrive::sonar() {
@@ -64,6 +74,10 @@ void CCCDrive::ping(int sensornumber) {
   } else {
     echo[sensornumber] = 0;
   }
+  
+  this->leftecho = echo[0];
+  this->rightecho = echo[2];
+  this->centerecho = echo[1];
 }
 
 void CCCDrive::begin() {

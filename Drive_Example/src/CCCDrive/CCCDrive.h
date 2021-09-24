@@ -18,7 +18,8 @@ class CCCDrive {
         void diagonal(int dir, int speed); 
         void drive(int motor, int dir, int speed); 
         void sonar();
-        void ping(int sensornumber);   
+        void ping(int sensornumber);  
+        void led(int value);		
         int RightFront = 16;
         int LeftRear = 17;
         int LeftFront = 18;
@@ -27,6 +28,9 @@ class CCCDrive {
         int Echo_Pins[3] = {9, 10, 11};
         int Trigger_Pin = 8;
         long echo[3];
+		long leftecho;
+		long rightecho;
+		long centerecho;
     private:
         int _motorAddress;
         int _motorDirection;
