@@ -33,10 +33,24 @@ void loop() {
   CheckforButton();   //Main command, do not remove! This monitors button press for robot state
   
   if(Running == 1) {  //If the robot should be moving, do things here
+
+    Robot.driveforward(50); 
+    delay(5000);
+    Robot.allstop();
+    delay(5000);
+    Robot.rightturn(50);
+    delay(1000);
+    Robot.drivereverse(50);
+    delay(5000);
+    Robot.diagonal(2,50);
+    delay(1000);
+    Robot.strafe(1, 60);
+    delay(5000);
+    Robot.allstop();
+    
     
   }
-  //CheckLineSensor();
-  
+ 
  
 }
 void CheckforButton() {
