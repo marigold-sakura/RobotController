@@ -19,12 +19,16 @@ void setup() {
   Robot.begin();
   start_btn.begin();
   Serial.println("- Cyber City Circuits -");
-
- 
-
-
   Serial.println("Robot Online and Ready");
   Serial.println("Waiting on button to begin");
+  
+  qtr.setTypeAnalog();
+  qtr/setSensorPins((const sensorArray[]){A0, A1, A2}, 8); //Don't know the analogs yet
+  
+  for (unint8_t i = 0; i < 250; i++)
+  {
+    qtr.calibrate();
+    delay(20);
 
 }
 
@@ -33,8 +37,11 @@ void loop() {
   CheckforButton();   //Main command, do not remove! This monitors button press for robot state
   
   if(Running == 1) {  //If the robot should be moving, do things here
+    
+    if (read(sensorArray)
 
-    Robot.driveforward(50); 
+    
+    /*Robot.driveforward(50); 
     delay(5000);
     Robot.allstop();
     delay(5000);
@@ -46,7 +53,7 @@ void loop() {
     delay(1000);
     Robot.strafe(1, 60);
     delay(5000);
-    Robot.allstop();
+    Robot.allstop();*/
     
     
   }
