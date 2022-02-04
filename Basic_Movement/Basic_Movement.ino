@@ -38,7 +38,11 @@ void loop() {
   
   if(Running == 1) {  //If the robot should be moving, do things here
     
-    if (read(sensorArray)
+    read(sensorArray);
+    if (sensorArray[0] = 0 && sensorArray[1] = 0 sensorArray[2] sensorArray[3] sensorArray[4] sensorArray[5] sensorArray[6] sensorArray[7]) {
+    
+    
+    }
 
     
     /*Robot.driveforward(50); 
