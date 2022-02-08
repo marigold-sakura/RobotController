@@ -23,7 +23,7 @@ void setup() {
   Serial.println("Waiting on button to begin");
   
   qtr.setTypeAnalog();
-  qtr.setSensorPins((const sensorArray[]){A0, A1, A2}, 8); //Don't know the analogs yet
+  qtr.setSensorPins((const sensorArray[]){14, 15, 16, 17, 18, 19, 20, 21}, 8); //Don't know the analogs yet
   
   for (unint8_t i = 0; i < 250; i++)
   {
