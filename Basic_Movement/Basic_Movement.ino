@@ -7,14 +7,14 @@ CCCDrive Robot;
 Button start_btn(7); //Connect momentary to GPIO 7
 
 
-int Running = 1;      //Set up variable to determine if the robot should be moving
+int Running;      //Set up variable to determine if the robot should be moving
 long myTimer = 0;
 
 void setup() {
   Serial.begin(115200);
   delay(2000);
-  Wire.setSDA(12);
-  Wire.setSCL(13);
+//  Wire.setSDA(12);  Don't know what's going on with these guys, just going to ignore them for now
+ // Wire.setSCL(13);
   Wire.begin();
   Robot.begin();
   start_btn.begin();
@@ -22,10 +22,15 @@ void setup() {
   Serial.println("Robot Online and Ready");
   Serial.println("Waiting on button to begin");
   
+  QTRSensors qtr;
   qtr.setTypeAnalog();
-  qtr.setSensorPins((const sensorArray[]){14, 15, 16, 17, 18, 19, 20, 21}, 8); //Don't know the analogs yet
+  // const int sensorArray[9] = {16, 17, 18, 19, 20, 21, 22, 15, 14}; //One of these is the emitter control pin, do important stuff with this
+  //Maybe I should make the sensor in the command below? Not sure if I tried this before. Be sure to log
+  int sensorCount = 8;
+  int sensorArray[sensorCount];
+  qtr.setSensorPins((sensorArray){16, 17, 18, 19, 20, 21, 22, 15, 14}, sensorCount);
   
-  for (unint8_t i = 0; i < 250; i++)
+  for (i = 0; i < 250; i++) //Do while loops work differently in C/C++ as well, or is this something else?
   {
     qtr.calibrate();
     delay(20);
@@ -145,6 +150,21 @@ void loop() {
       delay(2000)
       Robot.allstop();
     }
+    
+    /*Robot.driveforward(50); 
+    delay(5000);
+    Robot.allstop();
+    delay(5000);
+    Robot.rightturn(50);
+    delay(1000);
+    Robot.drivereverse(50);
+    delay(5000);
+    Robot.diagonal(2,50);
+    delay(1000);
+    Robot.strafe(1, 60);
+    delay(5000);
+    Robot.allstop();*/
+    
     
   }
  
